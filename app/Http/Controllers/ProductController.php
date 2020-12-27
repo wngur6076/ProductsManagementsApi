@@ -14,4 +14,34 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    public function show(Product $product)
+    {
+        return new ProductResource($product);
+    }
+
+    public function store()
+    {
+        $data = request()->all();
+
+        $product = Product::create($data);
+
+        return new ProductResource($product);
+    }
+
+    public function update(Product $product)
+    {
+        $data = request()->all();
+
+        $product->update($data);
+
+        return new ProductResource($product);
+    }
+
+    public function destroy(Product $product)
+    {
+        $product->delete();
+
+        return response()->noContent();
+    }
 }
